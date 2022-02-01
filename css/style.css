@@ -50,7 +50,9 @@ header{
 .back-face {
   transform: rotateY(180deg);
   }
-
+.back-face img{
+  width: 40%;
+} 
 .card.flip{
   transform: rotateY(180deg);
   }
