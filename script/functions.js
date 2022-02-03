@@ -4,6 +4,7 @@ let igualdade=null
 let repeticao=null
 let pairsFound=0
 let plays=0
+let blockSelection=false
 let first
 let second
 /* Card Number Input */
@@ -72,8 +73,8 @@ function unflipCard(element) {
 /* seleciona a carta */
 function selecionar(cartaSelecionada) {
  
-
-    if(cardsFlipped.includes(cartaSelecionada) != true){
+    
+    if(cardsFlipped.includes(cartaSelecionada) == false){
     
 
 
@@ -84,6 +85,7 @@ function selecionar(cartaSelecionada) {
             cardsSelected.push(cartaSelecionada);
             cardsFlipped.push(first);
             plays++
+            console.log('if')
         } 
         else if (cardsSelected.length==1) 
         {
@@ -93,28 +95,32 @@ function selecionar(cartaSelecionada) {
             plays++
 
             testarIgualdade(first,second);
-                
+            console.log('else if') 
+
             if (igualdade===true){
 
                 cardsFlipped.push(second);
                 cardsSelected.pop();
                 pairsFound++;
+                console.log('else if if')
             }
 
-            setTimeout(() => {
+           
             if (igualdade===false){
 
+                setTimeout(() => {
                 unflipCard(second);
                 unflipCard(first);
                 cardsSelected.pop();
                 cardsFlipped.pop();
-
-            }},500);
+                },500);
+                console.log('else if if2')
+            }
 
         }
     
         winCondition();
-    }       
+    } 
 
 }
 
