@@ -1,5 +1,11 @@
-var cardsFlipped = [];
-
+let cardsFlipped = [];
+let cardsSelected=[]
+let igualdade=null
+let repeticao=null
+let pairsFound=0
+let plays=0
+let first
+let second
 /* Card Number Input */
 
 let cardNumber=prompt("Quantas cartas voce deseja?(números pares de 4 á 14)");
@@ -23,7 +29,8 @@ function comparador() {
 for(let i=0; i<cardNumber; i++){
 
     let Cards = document.createElement('div');
-    Cards.setAttribute('class', 'card');
+    Cards.setAttribute('class', 'card card'+i);
+    Cards.setAttribute('data-id', ParrotSorted[i]);
     Cards.setAttribute('onclick','selecionar(this)')
     Cards.setAttribute('data-identifier', 'card');
     Cards.innerHTML += `
@@ -40,25 +47,93 @@ for(let i=0; i<cardNumber; i++){
 
 };
 /* Flip cards */
+
 function flipCard(element) {
+
+    
     let back= element.querySelector(".back-face");
     let front= element.querySelector(".front-face");
-    back.classList.toggle("back-face-rotate");
-    front.classList.toggle("front-face-rotate");
-}
-  
-/* yet to change */
+    back.classList.add("back-face-rotate");
+    front.classList.add("front-face-rotate");
 
-function selecionar(cartaSelecionada) {
+}
+
+function unflipCard(element) {
+
     
-  if (cardsFlipped.length == 0) {
-    cardsFlipped.push(cartaSelecionada);
-    flipCard(cartaSelecionada);
+    let back= element.querySelector(".back-face");
+    let front= element.querySelector(".front-face");
+    back.classList.remove("back-face-rotate");
+    front.classList.remove("front-face-rotate");
 
-  }else if (cardsFlipped.length == 1){
-    flipCard(cartaSelecionada);
-    cardsFlipped.push(cartaSelecionada);
-    testarigualdade;
-    cardsFlipped=[];}
 }
+   
+
+/* seleciona a carta */
+function selecionar(cartaSelecionada) {
  
+
+    if(cardsFlipped.includes(cartaSelecionada) != true){
+    
+
+
+        if (cardsSelected.length==0) {
+            /*selecionar primeira carta*/
+            first=cartaSelecionada;
+            flipCard(cartaSelecionada);
+            cardsSelected.push(cartaSelecionada);
+            cardsFlipped.push(first);
+            plays++
+        } 
+        else if (cardsSelected.length==1) 
+        {
+            /*selecionar segunda carta*/
+            second=cartaSelecionada;
+            flipCard(second);
+            plays++
+
+            testarIgualdade(first,second);
+                
+            if (igualdade===true){
+
+                cardsFlipped.push(second);
+                cardsSelected.pop();
+                pairsFound++;
+            }
+
+            setTimeout(() => {
+            if (igualdade===false){
+
+                unflipCard(second);
+                unflipCard(first);
+                cardsSelected.pop();
+                cardsFlipped.pop();
+
+            }},500);
+
+        }
+    
+        winCondition();
+    }       
+
+}
+
+function testarIgualdade(item1,item2){
+    
+    if (item1.getAttribute('data-id')===item2.getAttribute('data-id') && item1.getAttribute('class') !== item2.getAttribute('class')){
+        igualdade=true;
+    }else{igualdade=false;}
+
+}
+
+function testarRepeticao(item1,item2){
+
+    if (item1.getAttribute('data-id')===item2.getAttribute('data-id') && item1.getAttribute('class') === item2.getAttribute('class')){
+        repeticao=true;
+    }else{repeticao=false;}
+
+}
+
+function winCondition(){
+    if(pairsFound==cardNumber/2){alert(`Voce Ganhou! em ${plays} jogadas`)}
+}

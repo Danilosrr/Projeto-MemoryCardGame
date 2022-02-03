@@ -40,7 +40,7 @@ header{
   position: absolute;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  transition: transform .5s;
+  transition: transform 0.5s;
   }
 
 .back-face {
