@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/reset.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,11 +16,22 @@
 <body>
     <header >
         <h1>PARROT CARD GAME</h1>
-
+        <div class="clock">
+            <span id="plays">
+                <ion-icon name="play-outline"></ion-icon>
+                <p id="plays-counter">0</p>
+            </span>
+            <span id="timer">
+                <ion-icon name="timer-outline"></ion-icon>
+                <p id="time-countdown">0</p>
+            </span>
+        </div>
     </header>
     <main>
     </main>
 
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" src="script/functions.js"></script>
 </body>
 

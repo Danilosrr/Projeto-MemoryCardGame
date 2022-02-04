@@ -14,11 +14,24 @@ main{
 }
 
 header{
+  display: block;
+  justify-content: center;
+  align-items: center;
   font-size: 32px;
   color: #75B79E;
   font-weight: 700;
   text-align: center;
   font-family: 'Roboto', sans-serif;
+}
+.clock {
+  display: flex;
+  margin: auto 10%;
+  justify-content: end;
+  align-items: center;
+  font-size: 30px;
+}
+.clock span{
+  margin:auto 0 auto 50px;
 }
 
 .card {
@@ -41,8 +54,11 @@ header{
   backface-visibility: hidden;
   transform-style: preserve-3d;
   transition: transform 0.5s;
-  }
+}
 
+.back-face img{
+  width: 60%;
+}
 .back-face {
   transform: rotateY(180deg);
 }
